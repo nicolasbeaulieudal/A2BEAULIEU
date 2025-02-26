@@ -1,2 +1,4 @@
 ^A2BEAULIEU\.Rproj$
 ^\.Rproj\.user$
+^vignettes/\.quarto$
+^vignettes/*_files$
