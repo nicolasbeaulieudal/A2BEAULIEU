@@ -1,0 +1,543 @@
+---
+title: Assignment 2
+subtitle: STAT 4620/5620 Winter 2025
+vignette: >
+  %\VignetteIndexEntry{A2NAME}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{quarto::html}
+format: pdf
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Submission Instructions
+
+-   Follow the instructions in Question 1 to create an R package with
+    version control tracked by Git and upload it to GitHub. Include a
+    link to the GitHub repository at the end of Question 1.
+-   Modify this Quarto document to answer the questions and upload your
+    Quarto file and rendered PDF file to Brightspace.
+
+# Question 1 (14 points)
+
+-   This question will guide you through the creation of an R package
+    that can be used to increase the reproducibility and shareability of
+    your data analyses.
+
+1.  Install the `devtools` package.
+2.  In R Studio click the "Create a Project $\to$ New Directory $\to$ R
+    Package using devtools". Use the directory name "A2NAME", replacing
+    NAME with your name. Feel free to pick any folder for "Create
+    project as a subdirectory of:", a good option is your Data Analysis
+    STAT4620/5620 folder for the course, if you have one. Click "Create
+    Project". R Studio should automatically switch to the newly created
+    project, switch to it yourself if not.
+3.  Edit the package DESCRIPTION file to write your name in the author
+    field.
+4.  Start using version control for your package.
+    1.  [Install
+        git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+        if you have not already. Unless you know what you're doing, when
+        the git installer asks you to choose the default editor used by
+        git, switch it from Vim to something more familiar like Notepad.
+        Use the defaults for the rest of the options. Restart Rstudio.
+    2.  Find the "Terminal" pane in R Studio and type in the following
+        commands, substituting in your own name and e-mail:
+        -   `git config --global user.name 'Ethan Lawler'`
+        -   `git config --global user.email 'lawlerem@dal.ca'`
+    3.  In R Studio press "Tools $\to$ Version Control $\to$ Project
+        Setup...". A pop-up window should show up with the Git/SVN menu
+        selected. Change "Version control system..." to "Git", and say
+        "Yes" when it asks you if you want to initialize a new git
+        repository for this project, restarting R Studio if necessary.
+    4.  Find the "Git" panel in R Studio. This panel lists the files and
+        folder in your package and gives you some information about each
+        of them. Check the box for each file under the "Staged" column
+        and make sure the "Status" column changes to a green A that says
+        "Added" if you hover your cursor over it.
+    5.  When all files are added press the "Commit" button. In the
+        pop-up window write "Initial commit" in the "Commit message"
+        box. Press the "Commit" button, then feel free to close all the
+        windows except for your main R Studio window.
+    6.  Still in the "Git" panel, press the "History" button. You should
+        see a pop-up window containing a line saying "Initial commit"
+        along with your name, e-mail address, and date that you
+        completed the previous step. Close the pop-up window.
+5.  In the R folder of your package create an R file named `mean.R`. The
+    `mean.R` file should contain a function `mymean` that takes a
+    numeric vector as input and returns the mean of the vector. Make
+    sure your `mymean` function is fully documented using tags,
+    including a title, the name and description of the input vector, and
+    a description of what the function returns. Make sure your
+    documentation includes a tag to export your function. Run
+    `devtools::document()` in the "Console" panel to create help pages
+    from your documentation. You should notice that NAMESPACE, R/, and
+    man/ now appear in the "Git" panel. Add them by checking the boxed
+    under the "Staged" column, the NAMESPACE status should change to a
+    blue M to show that the NAMESPACE file was already part of the git
+    repository but has been changed since the previous commit. Commit
+    the files and folders using the commit message "Added and documented
+    a function to compute a mean."
+6.  Load the *cars* data.frame included in R then run
+    `usethis::use_data(cars)` to add the *cars* dataset to your package.
+    You should notice that a "data" folder has been added to your
+    package. Add a *data.R* file to the R folder of your package and
+    document the cars dataset there. Run `devtools::document()` to
+    create help pages from your documentation. Add all of your new files
+    and create a commit using the message "Added and documented a copy
+    of the cars dataset."
+7.  Create a package vignette with the code
+    `usethis::use_vignette("A2NAME.qmd")`, replacing NAME with your
+    name. You can use a package vignette to write a reproducible data
+    analysis that uses the function you write in your R/ folder and the
+    data you add to your package. For now you can leave the vignette
+    empty. Add all the files to git and commit them with the message
+    "Completed Question 1!".
+
+Now we'll set up your GitHub account and post your R package on GitHub.
+This step will be a bit complicated but you only ever need to do this
+set-up once. We will - Create a github account and an automatic password
+called a personal access token. - Create an ssh key that lets you move
+things from your computer to GitHub. - Create a new repository on GitHub
+then upload your package to GitHub.
+
+8.  Go to github.com and create a GitHub account (or use an existing
+    one). To upload to GitHub you need a Personal Access Token, go to
+    [this
+    link](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+    and follow the instructions for "Creating a personal access token
+    (classic)". When you get to step 8 and are asked to select the
+    scopes you'd like to grant, make sure the "repo" box is checked.
+    Click the clipboard icon next to your newly created personal access
+    token to copy it. In Rstudio, install the "gitcreds" package the run
+    `gitcreds::gitcreds_set()`. When it asks you to "enter password or
+    token: " paste in the copied personal access token and press enter.
+    Restart RStudio.
+9.  Back on GitHub, go the the "Your repositories" page and click the
+    "New" button to create a repository for your R package. The
+    repository name should have the same "A2NAME" name as your package.
+    Keep the default option to make it a public repository and click the
+    "Create repository" button.
+10. In the "Quick setup" box, make sure the "HTTPS" button is selected.
+    Copy the first two lines of the box under "...or push an existing
+    repository from the command line". The first line should contain a
+    url for you new repository that starts with "https://". Open the
+    Terminal panel in Rstudio, paste in those contents and press enter.
+    In the Git panel of Rstudio, press the "Push" button to upload your
+    files to your newly created GitHub repository.
+11. Go to your package repository on Github and check to see that all of
+    the files in your package are now uploaded to GitHub. Copy the url
+    for your GitHub repository and paste it below.
+
+**GitHub Repository URL**:
+https://github.com/nicolasbeaulieudal/A2BEAULIEU
+
+# Question 2 (4 points)
+
+-   Explain how the Akaike information criterion (AIC) is computed for a
+    generalized linear model and how it is commonly used for model or
+    variable selection purposed. Be sure to describe the two competing
+    goals that AIC tries to find a good balance for. (250 words)
+
+The Akaike information criterion (AIC) is a tool used to compare
+generalized linear models by weighing how well they fit the data against
+how complex they are. To compute AIC for a GLM, you first fit your model
+and obtain the maximum likelihood estimate. The AIC is then calculated
+using the formula
+
+$$
+\text{AIC} = -2 \times \log(L) + 2 \times k,
+$$
+
+where ($L$) is the maximum likelihood and ($k$) is the number of
+estimated parameters. The term ($-2 \times \log(L)$) rewards models that
+achieve a good fit, while the ($+2 \times k$) term penalizes models with
+more parameters.
+
+When selecting a model, you want to maximize how well your model fits
+the data (increase goodness-of-fit), but you also want to ensure that
+your model is not overfitting your data (increase generalizability). By
+increasing the number of parameters a model has, the goodness-of-fit
+will increase (unless the model is already overfitted) but the
+generalizability will decrease. As such, these are competing goals. By
+quantifying goodness-of-fit but including a penalty term for parameters
+in the AIC formula, AIC helps balance these objectives by discouraging
+unnecessary complexity.
+
+When using AIC for model or variable selection, you typically start with
+several candidate models and compare the AIC values of the candidates.
+The model with the smallest AIC is preferred because it is seen as
+achieving the best trade-off between the two competing goals.
+
+# Question 3 (4 points)
+
+-   Residual checking for GLMs is not always as straightforward as it is
+    for linear models, and the problems are particularly acute in the
+    case of binary responses. Explain why (100 words)
+
+Residual checking for GLMs is often more complex than for linear models,
+especially with binary responses. In linear models, residuals are
+assumed to be normally distributed with constant variance
+(homoscedastic). However, this assumption does not hold for GLMs where
+the variance is a function of the mean via the link function. Standard
+residual plots, if used uncritically, might mislead one into thinking
+there’s a problem when the distribution of residuals is inherently
+non-normal. This can be particularly problematic for binary data since
+the discrete nature causes residuals to cluster around a few values.
+
+# Question 4 (16 points)
+
+-   We are interested in a study concerning lung function in patients
+    with cystic fibrosis (Altman 1991, p.338). Install the **ISwR**
+    package and load the *cystfibr* dataset provided in that package.
+    1.  Fit a model relating maximum expiratory pressure (pemax) to the
+        explanatory variables contained in the dataset. Describe the
+        steps you take including fitting an initial model, residual
+        analysis, and changes to your initial model if needed. Make sure
+        you include the reasons why you make certain modelling choices.
+    2.  Interpret results for the sex variable.
+    3.  Try using the *step* function and interpret the results.
+    4.  What can you reasonably conclude from your analysis?
+
+1.  To determine an initial model, all variables were included in a
+    linear model, as in the following:
+
+```{r}
+if( !requireNamespace("ISwR", quietly = TRUE) ) install.packages("ISwR")
+library(ISwR)
+data(cystfibr)
+cystfibr$sex <- factor(cystfibr$sex, labels = c("male", "female"))
+
+# Fit an initial linear model with all variables as predictors
+initial_model <- lm(pemax ~ age + sex + height + weight + bmp + fev1 + rv + frc + tlc, 
+                    data = cystfibr)
+summary(initial_model)
+```
+
+As shown above, the initial model seem to is statistically significant
+overall, with a p value of 0.03. However, little strong correlation
+attributable to any single variable (given no single p value below 0.15
+even).\
+The model residuals were then analyzed as follows:
+
+```{r, fig.width=10, fig.height=7}
+# Residual analysis:
+par(mfrow = c(2, 2))
+plot(initial_model)
+```
+
+This reveals that the residuals of the initial model follow expected
+behaviors relatively well. The q-q plot reveals that the residuals
+follow the expected normal distribution reasonably well, and the
+leverage plot shows that the model does not suggest the presence of any
+particularly significant outliers. This suggests that the high p values
+found may be due to correlated variables.\
+As such, the variables will be plotted to observe if similar
+relationship curves are present for different variables. Simultaneously,
+colours within the plots will divide the population by sex to see if
+there might be mixed effects present.
+
+```{r, fig.width=10, fig.height=20}
+explanatory <- setdiff(names(cystfibr), "pemax")
+colors <- ifelse(cystfibr$sex == "male", "blue", "red")
+
+par(mfrow = c(5, 2))
+for (var in explanatory) {
+  plot(cystfibr[[var]], cystfibr$pemax,
+       xlab = var,
+       ylab = "pemax",
+       main = paste("pemax vs", var),
+       col = colors, pch = 19)
+}
+```
+
+\[Note: An iterated model will be provided later in accordance with
+(1.), but (2.) and (3.) will be answered first.\] 2. As seen in the
+pemax vs sex graph, those of the male sex seem to have a greater pemax
+value. However, looking further at the other graphs, this seems to be a
+result of non-independence of sex and other variables, rather than pemax
+resulting directly from sex. For example, it can be observed that a
+greater height and weight seem to correlate with an increased pemax
+value. Males on average have a greater height and weight then females
+which is likely part of the reason males have a higher pemax value than
+females on average as well. If sex did legitimately have a significant
+effect on pemax, when looking at a factor that contributes to pemax but
+which is dependent on sex (like height and weight), one would expect to
+see two distinct curves based on each sex population. Instead, we see
+only one. This, coupled with the high p value observed in the initial
+model, suggests that sex on its own is not a significant contributor to
+pemax, but factors dependent on sex may be.\
+3. The explanatory plots shown above seem to indicate dependency between
+variables. This suggests that a less complex yet similarly effective
+model can likely be created by eliminating redundant variables. To do
+so, the step function will be used to determine the linear model with
+the smallest AIC value.
+
+```{r}
+step_model <- step(initial_model, direction = "both", trace = 0)
+summary(step_model)
+```
+
+```{r, fig.width=10, fig.height=7}
+par(mfrow = c(2, 2))
+plot(step_model)
+```
+
+This reveals a far less complex model with a far greater statistical
+significance and similar residuals. If limited to linear model, this
+would be the chosen model.\
+1. (Continued) However, to attempt to find a better model, the linear
+relationships used to fit the model were extend to the use of splines.
+Given the very small number of data points, the model was restricted to
+splines of 3 degrees of freedom or less, the model was restricted to 7
+degrees of freedom, and the average of BIC and AIC was used rather than
+just AIC to further promote lower complexity. Given this, the following
+code was developed to optimize the model variables an degrees of
+freedom. \[Note that AI tools (OpenAI o3-mini high) were used to develop
+this code, the conversation can be seen at
+https://platform.openai.com/playground/p/6Zo2WZIEX6Wm6s42pWwf7vIt?mode=chat
+.\]
+
+```{r, fig.width=10, fig.height=7}
+library(splines)
+
+# Allowed degrees-of-freedom for the continuous predictors
+dfs <- 0:3
+
+# Create a grid for the eight continuous predictors
+param_grid <- expand.grid(age   = dfs,
+                          height = dfs,
+                          weight = dfs,
+                          bmp    = dfs,
+                          fev1   = dfs,
+                          rv     = dfs,
+                          frc    = dfs,
+                          tlc    = dfs,
+                          stringsAsFactors = FALSE)
+
+# Initialize best score, model, and parameters
+best_score <- Inf
+best_model <- NULL
+best_params <- list()
+
+total_combinations <- nrow(param_grid)
+
+# Loop over continuous-combination grid
+for(i in 1:total_combinations) {
+  
+  # Report progress every 100 combinations
+  if(i %% 100 == 0){
+    #cat("Processed", i, "combinations out of", total_combinations, "\n")
+  }
+  
+  # Get current dfs for continuous predictors
+  current_params <- param_grid[i, ]
+  
+  # Build continuous predictor terms:
+  cont_terms <- c()
+  for(var in names(current_params)) {
+    if(current_params[[var]] > 0) {
+      cont_terms <- c(cont_terms, paste0("ns(", var, ", df=", current_params[[var]], ")"))
+    }
+  }
+  
+  # Try both options for sex: included or not included
+  for(sex_included in c(TRUE, FALSE)) {
+    
+    # Calculate total df: sum over continuous variables plus 1 if sex is included.
+    total_df <- sum(as.numeric(current_params)) + ifelse(sex_included, 1, 0)
+    if(total_df > 7) next
+    
+    # Construct the candidate model terms
+    if(sex_included) {
+      terms <- c(cont_terms, "sex")
+    } else {
+      terms <- cont_terms
+    }
+    
+    # Skip candidate if no predictors are included.
+    if(length(terms) == 0) next
+    
+    # Create the model formula
+    formula_str <- paste("pemax ~", paste(terms, collapse = " + "))
+    formula_obj <- as.formula(formula_str)
+    
+    # Try to fit the model. If fitting fails, skip candidate.
+    fit <- tryCatch(lm(formula_obj, data = cystfibr), error = function(e) NULL)
+    if(is.null(fit)) next
+    
+    # Compute the performance measure (AIC+BIC)
+    score <- tryCatch(AIC(fit) * 1 + BIC(fit) * 1, error = function(e) NA)
+    if(is.na(score) || score == -Inf) next
+    
+    # If this candidate scores better, update best_score, best_model, and best_params.
+    if(score < best_score) {
+      best_score <- score
+      best_model <- fit
+      best_params <- list(continuous = current_params, sex_included = sex_included, total_df = total_df)
+    }
+  }
+}
+
+# Report the best model if one was found
+if(!is.null(best_model)){
+  cat("Best model found:\n")
+  cat("Degrees-of-freedom for continuous predictors:\n")
+  cat("Sex included:", best_params$sex_included, "\n")
+  cat("Total degrees-of-freedom:", best_params$total_df, "\n")
+  cat("Minimum AIC/BIC Combination =", best_score, "\n")
+} else {
+  cat("No valid model was found.\n")
+}
+```
+
+The resulting model (presented below) has 4 degrees-of-freedom, like the
+model developed with the step function. However, rather than including
+rv as a parameter, it includes a second degree spline of fev1 as two
+parameters.
+
+```{r}
+final_model <- lm(pemax ~ weight + bmp + ns(fev1, df = 2), data = cystfibr)
+summary(final_model)
+```
+
+This model demonstrates a better fit and greater statistical
+significance for the same number of parameters with a lower AIC and BIC
+value. As shown below, this model does seem to show issues having
+greater bias depending on fitted values, but has a generally well-fitted
+q-q plot. As such, it is chosen as the final model.
+
+```{r, fig.width=10, fig.height=7}
+par(mfrow = c(2, 2))
+plot(final_model)
+```
+
+4.  From the analysis, it can be concluded that pemax can reasonably be
+    predicted from the given fields. Due to inter-dependencies within
+    those fields, it can be difficult to determine what factors are
+    actually causal to pemax. However, by reducing the complexity of the
+    model and balancing the model fit using AIC and BIC, it was
+    determined that weight, bmp, and fev1 seem to be the best predictors
+    of pemax, given the provided data, with the first two being linear
+    predictors and the last being a predictor through a second-degree
+    polynomial relationship.
+
+# Question 5 (10 points)
+
+Show how to parameterize the following piecewise linear spline to ensure
+that the resulting function is continuous:
+
+1.  Use the knots $c = 10, 30, 50, 75$ so that you will have three
+    linear pieces.
+
+We write each linear segment in the form
+
+$$
+f_i(x) = \beta_{0,i} + \beta_{1,i}(x-l_i)
+$$
+
+which lead to the following setup:
+
+-   For x = \[10, 30\]:
+
+    $$ f_1(x) = \beta_{0,1} + \beta_{1,1}(x-10) $$
+
+-   For x = \[30, 50\]:
+
+    $$ f_2(x) = \beta_{0,2} + \beta_{1,2}(x-30) $$
+
+-   For x = \[50, 75\]:
+
+    $$ f_3(x) = \beta_{0,3} + \beta_{1,3}(x-50) $$
+
+2.  Let the slope of each linear piece be free to vary then find
+    conditions for the intercept of each linear piece to ensure the
+    function is continuous.
+
+-   *Hint:* It might be easier to write each linear segment in the form
+    $f_{i}\left(x\right) = \beta_{0, i} + \beta_{1,i}\left(x - l_{i}\right)$
+    where $l_{i}$ is the left endpoint for that linear segment.
+
+Continuity at the knots requires:\
+$$
+\begin{aligned}
+\text{At } x \in 30: \quad \beta_{0,2} &= \beta_{0,1} + 20\,\beta_{1,1} \\
+\text{At } x \in 50: \quad \beta_{0,3} &= \beta_{0,2} + 20\,\beta_{1,2} \\
+                          &= \beta_{0,1} + 20\,\beta_{1,1} + 20\,\beta_{1,2}
+\end{aligned}
+$$ Thus we get: $$
+f(x)=
+\begin{cases}
+\beta_{0,1} + \beta_{1,1}(x-10), & x \in [10,30] \\
+\left(\beta_{0,1}+20\beta_{1,1}\right) + \beta_{1,2}(x-30), & x \in [30,50] \\
+\left(\beta_{0,1}+20\beta_{1,1}+20\beta_{1,2}\right) + \beta_{1,3}(x-50), & x \in [50,75]
+\end{cases}
+$$
+
+3.  Modify the function below so that it takes a vector beta and an
+    input x and evaluates the spline using your parameterization. You
+    might need to remove $\beta_{5}$ and $\beta_{6}$ and replace them
+    with a value using your answer to (2.)
+
+```{r}
+knots<- c(10, 30, 50, 75)
+f<- function(beta, x) {
+    which_piece<- x |> cut(knots, labels = FALSE)
+    linear_pieces<- list()
+    linear_pieces[[1]]<- function(x) beta[1] + beta[2] * (x - knots[1])
+    linear_pieces[[2]]<- function(x) (beta[1] + (knots[2] - knots[1]) * beta[2]) + beta[3] * (x - knots[2])
+    linear_pieces[[3]]<- function(x) (beta[1] + (knots[2] - knots[1]) * beta[2] + (knots[3] - knots[2]) * beta[3]) + beta[4] * (x - knots[3])
+    prediction<- sapply(
+        x |> seq_along(),
+        function(i) linear_pieces[[which_piece[i]]](x[i])
+    )
+    return( prediction )
+}
+```
+
+4.  Write a sum-of-squares function that takes a $\beta$ parameter
+    vector as input and gives you the sum-of-squared errors as output,
+    using cystfibr as your dataset, pemax as your response variable, and
+    weight as your covariate. Then use the nlminb function to find the
+    best estimate for $\beta$ and plot the estimated piecewise linear
+    function in the same plot as the data.
+
+```{r}
+# Sum-of-squares function
+sse <- function(beta) {
+  predictions <- f(beta, cystfibr$weight)
+  residuals <- cystfibr$pemax - predictions
+  sum_of_squares <- sum(residuals^2)
+  return(sum_of_squares)
+}
+
+# Fit the model
+fit <- nlminb(start = rep(0, 4), objective = sse)
+
+print(fit)
+```
+```{r}
+# Plot with the fitted spline
+par(mfrow = c(1, 1))
+plot(cystfibr$weight, cystfibr$pemax, pch=16, 
+     xlab="Weight", ylab="Pemax", main="Pemax vs. Weight with Spline Fit")
+spline_x <- seq(min(cystfibr$weight), max(cystfibr$weight), length.out=1000)
+lines(spline_x, f(fit$par, spline_x), col="red")
+```
+
+```{r}
+knots<- c(10, 30, 50, 75)
+f<- function(beta, x) {
+    which_piece<- x |> cut(knots, labels = FALSE)
+    linear_pieces<- list()
+    linear_pieces[[1]]<- function(x) beta[1] + beta[2] * (x - knots[1])
+    linear_pieces[[2]]<- function(x) beta[5] + beta[3] * (x - knots[2])
+    linear_pieces[[3]]<- function(x) beta[6] + beta[4] * (x - knots[3])
+    prediction<- sapply(
+        x |> seq_along(),
+        function(i) linear_pieces[[which_piece[i]]](x[i])
+    )
+    return( prediction )
+}
+```
